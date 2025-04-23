@@ -33,7 +33,7 @@ def sendmail():
     server.starttls()
 
     #extremely vulnerable info but its for a side gmail account so
-    server.login(email, "ijqf bhcf yhpc ukdp")
+    server.login(email, "insert your thing here")
 
 
     #sends the mail
